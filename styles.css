@@ -1,0 +1,323 @@
+/* "Magic Canvas", matching the WhoDecided app. */
+:root {
+  --bg: #f4f1e6;
+  --ink: #1f1f1f;
+  --muted: #5e5a52;
+  --hint: #6e695f;
+  --yellow: #f5c451;
+  --green: #6cc26b;
+  --coral: #e8775a;
+  --pink: #f2a7c9;
+  --dot: #d9d3c4;
+  --dash: #bdb7a8;
+  --doubt: #e2dccb;
+  --white: #ffffff;
+  --sketch: 6px 18px 8px 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 28px 18px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.loading {
+  margin-top: 40vh;
+  color: var(--hint);
+}
+
+/* Header wordmark */
+.brand {
+  align-self: stretch;
+  text-align: left;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 18px;
+}
+
+/* Handwritten note */
+.hand {
+  font-family: "Caveat", cursive;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--hint);
+  align-self: flex-start;
+  margin: 6px 0 4px 4px;
+  transform: rotate(-6deg);
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 400;
+  margin: 4px 0 0;
+}
+
+.lead {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 18px 0 0;
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 12px 0 0;
+}
+
+/* Yellow highlighter behind a word */
+.mark {
+  background: var(--yellow);
+  font-weight: 700;
+  padding: 0 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Green scribble underline */
+.scribble {
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+.doodle {
+  width: 170px;
+  height: auto;
+  margin: 18px 0 4px;
+}
+
+/* Coral brush button: slightly uneven edges */
+.brush {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 14px 30px 15px;
+  background: var(--coral);
+  color: var(--white);
+  font: 500 16px "DM Sans", sans-serif;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transform: rotate(-1.5deg);
+  clip-path: polygon(2% 10%, 30% 2%, 62% 6%, 98% 0, 100% 46%, 97% 92%, 64% 100%, 30% 95%, 3% 100%, 0 52%);
+  transition: transform 0.15s;
+}
+
+.brush:active {
+  transform: rotate(-1.5deg) scale(0.97);
+}
+
+.brush:focus-visible,
+.answer:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Belief card */
+.card {
+  align-self: stretch;
+  margin-top: 22px;
+  padding: 26px 20px 22px;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--sketch);
+  transition: transform 0.4s ease-in, opacity 0.4s ease-in;
+}
+
+.card.enter {
+  animation: pop 0.35s ease-out;
+}
+
+.card.fly-left {
+  transform: translateX(-130%) rotate(-18deg);
+  opacity: 0;
+}
+
+.card.fly-right {
+  transform: translateX(130%) rotate(18deg);
+  opacity: 0;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.card .q {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.card .belief {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 14px 0 0;
+}
+
+.card .cat {
+  font-size: 13px;
+  color: var(--hint);
+  margin: 14px 0 0;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+
+.dots span.on {
+  background: var(--ink);
+}
+
+.answers {
+  align-self: stretch;
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.answer {
+  flex: 1;
+  min-height: 48px;
+  border: 0;
+  border-radius: 24px;
+  font: 500 15px "DM Sans", sans-serif;
+  cursor: pointer;
+}
+
+.answer.doubt {
+  background: var(--doubt);
+  color: var(--ink);
+}
+
+.answer.believe {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.answer:disabled {
+  opacity: 0.6;
+}
+
+/* Results */
+.scores {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.score {
+  font-size: 15px;
+  line-height: 1.4;
+  padding: 6px 10px;
+}
+
+.score b {
+  display: block;
+  font-size: 28px;
+}
+
+.score.you {
+  background: var(--yellow);
+}
+
+.verdict {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 18px 0 0;
+}
+
+.list {
+  align-self: stretch;
+  text-align: left;
+  margin-top: 20px;
+  padding: 4px 16px;
+  background: var(--white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--sketch);
+}
+
+.list .item {
+  padding: 12px 0;
+  border-bottom: 1.5px dashed var(--dash);
+}
+
+.list .item:last-child {
+  border-bottom: 0;
+}
+
+.list .belief {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0;
+}
+
+.list .who {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+.yes,
+.no {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card.enter,
+  .brush {
+    transition: none;
+    animation: none;
+  }
+}
